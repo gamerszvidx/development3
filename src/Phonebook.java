@@ -2,7 +2,8 @@
  * Created by ricardo on 2/26/2015.
  */
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Phonebook {
 
@@ -51,35 +52,55 @@ public class Phonebook {
         }
 
     }
-    public void editPerson(Scanner scan,String newLine){
+
+    public void editPerson(Scanner scan, String newLine) {
+        int personToEdit = 0;
+        String whatToEdit = null;
         listPersons(newLine);
         System.out.println("fill in the ID of the person to be changed");
-        int personToEdit = Integer.parseInt(scan.nextLine());
-        System.out.println("fill in what to edit, name, adress, city or phonenumber. case sensitive");
-        String whatToEdit = scan.nextLine();
-        System.out.println("what would you like to change it to?");
-        String changeTo = scan.nextLine();
-        try {
-            if (whatToEdit.equals("name")) {
-                personen.get(personToEdit).setName(changeTo);
-            } else if (whatToEdit.equals("adress")) {
-                personen.get(personToEdit).setAdress(changeTo);
-            } else if (whatToEdit.equals("city")) {
-                personen.get(personToEdit).setCity(changeTo);
-            } else if (whatToEdit.equals("phonenumber")) {
-                personen.get(personToEdit).setPhonenumber(changeTo);
-            }
-        }catch(Exception ex){
-            System.out.println("please try again");
+        int inputID = Integer.parseInt(scan.nextLine());
+        if (inputID < personen.size()) {
+            personToEdit = inputID;
+        } else {
+            System.out.println("there is no person with this ID please try again");
             editPerson(scan, newLine);
         }
-        finally {
-            System.out.println("the requested change has been made. type /listpersons to check the change");
+        System.out.println("fill in what to edit, name, adress, city or phonenumber. case sensitive");
+        String inputEdit = scan.nextLine();
+        if (inputEdit.equals("name")|| inputEdit.equals("adress") || inputEdit.equals("city") || inputEdit.equals("phonenumber")){
+            whatToEdit = inputEdit;
+        }else {
+            System.out.println(inputEdit + " is not a right choice, please try again");
+            editPerson(scan,newLine);
         }
+        System.out.println("what would you like to change it to?");
+        String changeTo = scan.nextLine();
+        if (whatToEdit.equals("name")) {
+            personen.get(personToEdit).setName(changeTo);
+        } else if (whatToEdit.equals("adress")) {
+            personen.get(personToEdit).setAdress(changeTo);
+        } else if (whatToEdit.equals("city")) {
+            personen.get(personToEdit).setCity(changeTo);
+        } else if (whatToEdit.equals("phonenumber")) {
+            personen.get(personToEdit).setPhonenumber(changeTo);
+        } else {
+            System.out.println("something went wrong, try again");
+            editPerson(scan, newLine);
+        }
+        System.out.println("the requested change has been made" + newLine + "edit more? type yes/no");
+        String editMore = scan.nextLine();
+        if (editMore.equals("yes")) {
+            editPerson(scan, newLine);
+        } else {
+
+        }
+
     }
-
-    //public void sortlist(){
-     //  Collections.sort(personen);
-    //}
-
 }
+
+
+//public void sortlist(){
+//  Collections.sort(personen);
+//}
+
+
