@@ -52,6 +52,23 @@ public class Phonebook {
         }
 
     }
+    public void searchPerson(String newLine, Scanner scan){
+        System.out.println("fill in the full name of the person to search for");
+        String personToBeFound = scan.nextLine();
+        for(int i = 0;i < personen.size(); i++){
+            if(personToBeFound.equals(personen.get(i).name)){
+                System.out.println("the person has been found");
+                System.out.println(personen.get(i).name + newLine +
+                personen.get(i).adress + newLine +
+                personen.get(i).city + newLine +
+                personen.get(i).phonenumber);
+            }
+            else {
+                System.out.println("person not found");
+            }
+
+        }
+    }
 
     public void editPerson(Scanner scan, String newLine) {
         int personToEdit = 0;

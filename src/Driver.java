@@ -12,8 +12,9 @@ public class Driver {
             "/list - for full list of persons",
             "/remove - to remove a made person",
             "/sortlist - sorts the phonebook (alphabetically)",
-            "/exit - exits the phonebook program",
-            "/edit - too edit an existing person"};
+            "/edit - to edit an existing person",
+            "/search - to search for a person",
+            "/exit - exits the phonebook program"};
     private boolean running;
     private boolean startmessage = false;
 
@@ -43,6 +44,8 @@ public class Driver {
                 telbook.addPerson(scan);
             } else if (entered.equals("/exit")) {
                 exit();
+            } else if (entered.equals("/search")) {
+                telbook.searchPerson(newLine,scan);
             } else if (entered.equals("/edit")) {
                 telbook.editPerson(scan,newLine);
             } else if (entered.equals("/list")) {
